@@ -6,7 +6,7 @@ const postSchema =  mongoose.Schema({
     required: true,
     trim: true
   },
-  turno: {
+  shift: {
     type: String,
     required: true,
     trim: true
@@ -17,7 +17,6 @@ const postSchema =  mongoose.Schema({
   },
   registrationDate: {
     type: Date,
-    required: true
   }
 })
 

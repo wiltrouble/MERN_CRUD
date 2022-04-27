@@ -1,9 +1,34 @@
-export const getPosts = (req, res) => res.send([])
+import Post from '../models/Post.js';
+export const getPosts = async (req, res) => {
 
-export const createPost = (req, res) => res.send('new post created')
+  const posts = await Post.find()
+  res.send(posts)
+}
 
-export const updatePost = (req, res) => res.send('updating a post')
+export const createPost = async (req, res) => {
+  const  {name, shift} = req.body
+  const newPost = new Post({name, shift})
+  await newPost.save()
+  return res.json(newPost)
+}
 
-export const deletePost = (req, res) => res.send('deleting a post')
+export const updatePost = async (req, res) => {
+  const post = await Post.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  console.log(post);
+  return res.send('received')
 
-export const getPost = (req, res) => res.send('getting a post')
+}
+
+export const deletePost = async (req, res) => {
+  const postRemoved = await Post.findByIdAndDelete(req.params.id)
+   
+  if (!postRemoved) return res.sendStatus(404)
+
+  return res.sendStatus(204)
+}
+
+export const getPost = async (req, res) => {
+  const post = await Post.findById(req.params.id)
+  if (!post) return res.sendStatus(404)
+  return res.json(post)
+}
