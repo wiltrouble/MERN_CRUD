@@ -21,11 +21,10 @@ export const createPost = async (req, res) => {
 
 export const updatePost = async (req, res) => {
   try {
-    const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
+    const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    console.log(post);
-    return res.send("received");
+    return res.send(updatePost);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
