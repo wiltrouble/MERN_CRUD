@@ -11,7 +11,7 @@ export const HomePage = () => {
     return (
       <div className='flex flex-col justify-center items-center'>
         <VscEmptyWindow className='w-48 h-48 text-white'/>
-        <h1 className='text-white text-2xl'>There are not posts</h1>
+        <h1 className='text-white text-2xl'>There are not posts yet</h1>
       </div>
     )
   }
