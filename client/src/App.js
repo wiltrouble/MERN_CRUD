@@ -5,7 +5,7 @@ import { PostProvided } from "./context/postContext";
 const App = () => {
   return (
     <div className="bg-neutral-900 min-h-screen flex items-center">
-      <div className="px-10 containe m-auto">
+      <div className="px-10 container m-auto">
         <PostProvided>
           <Routes>
             <Route path="/" element={<HomePage />} />
