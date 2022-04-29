@@ -49,8 +49,8 @@ export const deletePost = async (req, res) => {
   try {
     const postRemoved = await Post.findByIdAndDelete(req.params.id);
     if (!postRemoved) return res.sendStatus(404);
-    if(postRemoved.image.public_id) {
-      await deleteImage(postRemoved.image.public_id)
+    if(postRemoved.photo.public_id) {
+      await deleteImage(postRemoved.photo.public_id)
     }
     return res.sendStatus(204);
   } catch (error) {
