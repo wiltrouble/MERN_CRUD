@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import { usePosts } from "../context/postContext";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export const PostCard = ({ post }) => {
   const navigate = useNavigate()
@@ -59,7 +59,7 @@ export const PostCard = ({ post }) => {
         </div>
         <p className="text-gray-400">{post.shift}</p>
       </div>
-      {post.photo && <img src={post.photo.url} alt={post.name} />}
+      {post.photo && <img classNameName="" src={post.photo.url} alt={post.name} />}
     </div>
   );
 };
