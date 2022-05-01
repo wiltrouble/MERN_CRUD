@@ -2,7 +2,20 @@ import axios from 'axios';
 
 export const getPostsRequest = async () => await axios.get('/posts')
 
-export const createPostRequest = async post => await axios.post('/posts', post)
+export const createPostRequest = async post => {
+  const form = new FormData()
+  for (let key in post) {
+    form.append(key, post[key])
+  }
+  
+  const res =  await axios.post('/posts', form, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    }
+  })
+  console.log(res.data);
+  return res
+}
 
 export const deletePostRequest = async (id) => await axios.delete("/posts/" + id);
 

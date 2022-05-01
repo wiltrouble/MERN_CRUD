@@ -40,22 +40,26 @@ export const PostCard = ({ post }) => {
   };
 
   return (
-    <div 
-      className="bg-zinc-800 text-white rounded-sm shadow-md shadow-black hover:bg-zinc-700 hover:cursor-pointer"
-      onClick={() => navigate(`/posts/${post._id}`)}>
+    <div
+      className="bg-zinc-800 text-white rounded-md shadow-md shadow-black hover:bg-zinc-700 hover:cursor-pointer"
+      onClick={() => navigate(`/${post._id}`)}
+    >
       <div className="px-4 py-7">
-        <div className="flex justify-between">
-          <h3>{post.name}</h3>
+        <div className="flex justify-between items-center">
+          <h3 className="text-md font-semibold">{post.name}</h3>
           <button
             className="bg-red-600 text-sm px-2 py-1 rounded-sm"
-            onClick={() => handleDelete(post._id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDelete(post._id);
+            }}
           >
             Eliminar
           </button>
         </div>
-
-        <p>{post.shift}</p>
+        <p className="text-gray-400">{post.shift}</p>
       </div>
+      {post.photo && <img src={post.photo.url} alt={post.name} />}
     </div>
   );
 };

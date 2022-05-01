@@ -11,7 +11,8 @@ export const PostForm = () => {
 
   const [post, setPost] = useState({
     name: "",
-    shit: "",
+    shift: "",
+    image: null,
   });
 
   useEffect(() => {
@@ -21,14 +22,16 @@ export const PostForm = () => {
         setPost(post);
       }
     })();
-  }, [params.id]);
+  }, [params.id, getPost]);
 
   return (
     <div className="flex items-center justify-center">
       <div className="bg-zinc-800 p-10 shadow-md shadow-black">
         <header className="flex justify-between py-2">
           <h3 className="text-xl text-white">New post</h3>
-          <Link to="/" className="text-gray-400 text-sm hover:text-gray-300">Go Back</Link>
+          <Link to="/" className="text-gray-400 text-sm hover:text-gray-300">
+            Go Back
+          </Link>
         </header>
         <Formik
           initialValues={post}
@@ -38,7 +41,7 @@ export const PostForm = () => {
           })}
           onSubmit={async (values, actions) => {
             if (params.id) {
-              await updatePost(params.id, values)
+              await updatePost(params.id, values);
             } else {
               await createPost(values);
             }
@@ -46,7 +49,7 @@ export const PostForm = () => {
           }}
           enableReinitialize
         >
-          {({ handleSubmit }) => (
+          {({ handleSubmit, setFieldValue }) => (
             <Form onSubmit={handleSubmit}>
               <label
                 className="text-sm block font-bold text-gray-400"
@@ -80,6 +83,19 @@ export const PostForm = () => {
                 className="text-red-400 text-sm"
                 name="shift"
               />
+
+              <label
+                className="text-sm block font-bold text-gray-400"
+                htmlFor="name"
+              >
+                Foto
+              </label>
+              <input
+                type="file"
+                name="image"
+                className="px-3 py-2 focus:outline-none rounded bg-gray-600 text-white w-full"
+                onChange={(e) => setFieldValue('image', e.target.files[0])}
+              ></input>
               <button
                 type="submit"
                 className="bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded mt-2 text-white focus:outline-none disabled:bg-indigo-400"
